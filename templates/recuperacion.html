@@ -17,218 +17,38 @@
   <body>
     <header>
       <nav class="navbar fixed-top menu">
-       <a href="index.html">
-         <img height="70px"src="../static/img/logo.jpeg" alt="logo" />
+        <a href="/dashboard" class="ml-5">
+          <img height="70px"src="{{url_for('static', filename='img/logo.jpeg')}}" alt="logo redvision" />
         </a>
          
         
-        <ul class="nav navbar justify-content-end">
-          <li class="nav-item pr-3">
-            <a
-              class="btn btn-ini boton"
-              href="#"
-              data-toggle="modal"
-              data-target="#staticBackdrop"
-              >Iniciar Sesión</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="btn btn-light boton"
-              href="#"
-              data-toggle="modal"
-              data-target="#staticBackdrop2"
-              >Registrarme</a
-            >
-          </li>
-        </ul>
       </nav>
     </header>
     <div class="container mt-5 pt-5">
         <div class="row mt-5">
             <div class="col-12 text-center">
                 <h1>Elije una nueva contraseña</h1>
-            </div>
+            </div>  
             <div class="col-4 offset-4">
-                <form class="mt-5">
+                <form method="POST" class="mt-5">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Contraseña"  id="password" name="password" aria-describedby="emailHelp">
+                      
+                      <input type="password"  class="form-control" placeholder="Contraseña" id="password" name="password" required minlength = "8"/>
+                      {% with messages = get_flashed_messages() %}
+                      
+                        {% for message in messages %}
+                        <div class="alert alert-danger" id="borrar" role="alert">
+                          {{ message }}
+                          </div>
+                          
+                        {% endfor %}
+                       
+                      {% endwith %}
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Repetir contraseña" id="password2" name="password2" aria-describedby="emailHelp">
-                    </div>
-
-                    <button type="button" class="btn btn-primary btn-block btn-ini" onclick="cambioContrasena()">Cambiar</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-ini">Cambiar</button>
                   </form>
 
             </div>
-        </div>
-    </div>
-
-        <!-- Modal login -->
-        <div
-        class="modal hide fade"
-        id="staticBackdrop"
-        data-keyboard="true"
-        tabindex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">
-                Iniciar Sesión
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
-            <div class="modal-body">
-              <form action="/login" method="POST" id="formlogin" >
-                <div class="form-group">
-                  <input
-                    type="email"
-                    placeholder="Correo"
-                    class="form-control"
-                    id="correo"
-                    aria-describedby="emailHelp"
-                    name="correo"
-                  />
-                </div>
-
-                <div class="form-group">
-                  <input
-                    type="password"
-                    placeholder="Contraseña"
-                    class="form-control"
-                    placeholder=""
-                    id="contraseña"
-                    name="contrasena"
-                  />
-                </div>
-                
-                <div class="iniciar text-center">
-                  <div id="error"></div>
-                  <button type="submit" class="btn btn-block btn-sesion mb-2">Iniciar Sesión</button>
-                  <a href="" data-dismiss="modal" data-toggle="modal" data-target="#recuperacion">¿Olvidaste tu Contraseña?</a>
-                </div>
-              </form>
-              
-            </div>
-
-            <div class="text-center linea pt-3 mb-2">
-              <button class="btn btn-crear mb-2" data-dismiss="modal" data-toggle="modal" data-target="#staticBackdrop2">Crear Cuenta Nueva</button>
-            </div>
-
-          </div>
-        </div>
-    </div>
-    
-
-
-    <!-- Modal registro -->
-    <div
-        class="modal fade"
-        id="staticBackdrop2"
-        data-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">
-                Registrarme
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
-            <div class="modal-body">
-              <form action="/crearusuario" method="POST" id="formregistro">
-                <div class="form-group row ">             
-                  <input
-                    type="text"
-                    placeholder="Nombre"
-                    class="form-control col-5 ml-3 mr-4"
-                    id="nombrer"
-                    name="nombre"
-                    
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Apellido"
-                    class="form-control col-5"
-                    id="apellidor"
-                    name="apellido"
-                  />
-                </div>
-
-                <div class="form-group">
-                  <input
-                    type="text"
-                    placeholder="Nombre de Usuario"
-                    class="form-control"
-                    id="usuarior"
-                    name="usuario"
-
-                  />
-                </div>
-
-                <div class="form-group">
-                  <input
-                    type="email"
-                    placeholder="Correo Electrónico"
-                    class="form-control"
-                    id="correor"
-                    name="correo"
-
-                  />
-                </div>
-
-                <div class="form-group">
-                  <input
-                    type="password"
-                    placeholder="Contraseña"
-                    class="form-control"
-                    id="contraseñar"
-                    name="contraseña"
-                  />
-                </div>
-                <div class="form-group mt-3">
-                  <input
-                    type="date"
-                    placeholder="Fecha de nacimiento"
-                    class="form-control"
-                    id="fechar"
-                    name="fecha"
-                  />
-                </div>
-                <div id="errorRegistro"></div>
-                <div class="text-center  pt-3 mb-2">
-                  <button type="submit" class="btn btn-crear mb-2">Crear Cuenta Nueva</button>
-                </div>
-              </form>
-            </div>
-
-
-          </div>
         </div>
     </div>
 

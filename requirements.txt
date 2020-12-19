@@ -1,2 +1,6 @@
 flask
 Flask-SQLalchemy
+wget
+validate_email
+python-dateutil
+itsdangerous

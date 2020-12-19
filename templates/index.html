@@ -16,8 +16,8 @@
     <script src="{{url_for('static', filename='assets/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{url_for('static', filename='js/main.js')}}"></script>
-    <script src="{{url_for('static', filename='js/ajaxlogin.js')}}?n=345535532287359468798796756756346540434"></script>
-    <script src="{{url_for('static', filename='js/ajaxRegistro.js')}}?n=12355555555678985465657657798555555566566"></script>
+    <script src="{{url_for('static', filename='js/ajaxlogin.js')}}"></script>
+    <script src="{{url_for('static', filename='js/ajaxRegistro.js')}}"></script>
 
 
     <title>Redvision</title>
@@ -32,7 +32,7 @@
         <ul class="nav navbar justify-content-end">
           <li class="nav-item pr-3">
             <a
-              id="idBtnIniciar"
+              id="BtnIniciar"
               class="btn btn-ini boton"
               href="#"
               data-toggle="modal"
@@ -42,7 +42,7 @@
           </li>          
           <li class="nav-item">
             <a
-              id="idBtnRegistro"
+              id="BtnRegistro"
               class="btn btn-light boton"
               href="#"
               data-toggle="modal"
@@ -120,6 +120,7 @@
                     id="correo"
                     aria-describedby="emailHelp"
                     name="correo"
+                    required
                   />
                 </div>
 
@@ -127,24 +128,25 @@
                   <input
                     type="password"
                     placeholder="Contraseña"
-                    class="form-control"
+                    class="form-control "
                     placeholder=""
                     id="contraseña"
                     name="contrasena"
+                    required
                   />
                 </div>
                 
                 <div class="iniciar text-center">
                   <div id="error"></div>
-                  <button type="submit" class="btn btn-block btn-sesion mb-2">Iniciar Sesión</button>
-                  <a href="" data-dismiss="modal" data-toggle="modal" data-target="#recuperacion">¿Olvidaste tu Contraseña?</a>
+                  <button  type="submit" class="btn btn-block btn-sesion mb-2">Iniciar Sesión</button>
+                  <a  href="" data-dismiss="modal" data-toggle="modal" data-target="#recuperacion">¿Olvidaste tu Contraseña?</a>
                 </div>
               </form>
               
             </div>
 
             <div class="text-center linea pt-3 mb-2">
-              <button class="btn btn-crear mb-2" data-dismiss="modal" data-toggle="modal" data-target="#staticBackdrop2">Crear Cuenta Nueva</button>
+              <button  class="btn btn-crear mb-2" data-dismiss="modal" data-toggle="modal" data-target="#staticBackdrop2">Crear Cuenta Nueva</button>
             </div>
 
           </div>
@@ -187,7 +189,7 @@
                     class="form-control col-5 ml-3 mr-4"
                     id="nombrer"
                     name="nombre"
-                    
+                    required
                   />
 
                   <input
@@ -196,16 +198,18 @@
                     class="form-control col-5"
                     id="apellidor"
                     name="apellido"
+                    required
                   />
                 </div>
 
                 <div class="form-group">
                   <input
                     type="text"
-                    placeholder="nombreUsuario"
+                    placeholder="Nombre de Usuario"
                     class="form-control"
-                    id="nombreUsuario"
-                    name="nombreUsuario"
+                    id="usuarior"
+                    name="usuario"
+                    required
                   />
                 </div>
 
@@ -216,6 +220,7 @@
                     class="form-control"
                     id="correor"
                     name="correo"
+                    required
 
                   />
                 </div>
@@ -227,6 +232,8 @@
                     class="form-control"
                     id="contraseñar"
                     name="contraseña"
+                    required
+                    minlength = "8"
                   />
                 </div>
                 <div class="form-group mt-3">
@@ -236,6 +243,7 @@
                     class="form-control"
                     id="fechar"
                     name="fecha"
+                    required
                   />
                 </div>
                 <div id="errorRegistro"></div>
@@ -300,20 +308,21 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="formularioRecuperacion">
+            <form action="/CorreoRecuperar" method="POST">
               <div class="form-group">
                 <input
                   type="email"
                   placeholder="Ingrese su correo electronico"
                   class="form-control"
-                  id="correoRecuperacion"
+                  id="exampleInputEmail1"
+                  name="recuperarcorreo"
                   aria-describedby="emailHelp"
                 />
               </div>
               <div class="iniciar text-center">
-                <a class="btn btn-block btn-sesion mb-2" data-dismiss="modal" onclick="recuperarContrasena()">
+                <button type = "submit" class="btn btn-block btn-sesion mb-2" >
                   Enviar
-                </a>
+                </button>
               
               </div>
             </form>

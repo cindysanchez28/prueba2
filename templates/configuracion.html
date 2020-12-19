@@ -9,37 +9,52 @@
         <div class="col-3">
           <div class="row">
             <div class="col-12 mt-5 d-flex justify-content-center align-items-center">
-                <img class="redondo" src="{{url_for('static', filename='img/perfil_defecto.jpg')}}" alt="perfil">
+                <img class="redondo" src="{{url_for('static', filename=usuario.imgPerfil)}}"  alt="perfil">
             </div>
             <div class="col-12 mt-4">
-                <div class="text-center">
-                  <button type="button" class="btn btn-ini">Cambiar</button>
+              <form action="{{ url_for('uploadImagePerfil')}}" method="POST"  enctype="multipart/form-data">
+
+                <div class="custom-file" id="customFile">
+                  <input type="file" class="custom-file-input" id="exampleInputFile" name="imagenPerfil"  aria-describedby="fileHelp" required>
+                  <label class="custom-file-label" for="exampleInputFile">
+                    Img Perfil
+                  </label>
                 </div>
-
-
+                <div class="mb-3 text-center mt-4">
+                  <button class="btn btn-ini" type="submit">Actualizar Imagen</button>
+                </div>
+              </form>
             </div>
         </div>
         </div>
         <div class="col-6">
-          <form>
+          <form action="{{ url_for('updateConfiguracion')}}" method="POST" onsubmit="Storage()" >
             <div class="form-group">
               <label for="exampleInputEmail1">Nombre</label>
-              <input type="text" class="form-control" value="Nombre Usuario" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="text" class="form-control" value="{{usuario.nombre}}" name="nombre" id="exampleInputEmail1" aria-describedby="emailHelp" required>
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Correo</label>
-              <input type="email" class="form-control" value="usuario@usuario.com" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <label for="exampleInputEmail2">Apellido</label>
+              <input type="text" class="form-control" value="{{usuario.apellido}}" name="apellido" id="exampleInputEmail2" aria-describedby="emailHelp" required>
             </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Usuario</label>
-              <input type="text" class="form-control" value="@usuario" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
+            
             <div class="form-group">
               <label for="exampleInputEmail1">fecha de nacimiento</label>
-              <input type="date" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="date" class="form-control"  value="{{usuario.fecha}}" name="fecha" aria-describedby="emailHelp" required>
             </div>
+            {% with messages = get_flashed_messages() %}
+                      
+                        {% for message in messages %}
+                        <div class="alert alert-danger" id="borrar" role="alert">
+                          {{ message }}
+                          </div>
+                          
+                        {% endfor %}
+                       
+                      {% endwith %}
             <div class="text-center">
-              <button type="submit" class="btn  btn-ini">Actualizar</button>
+
+              <button type="submit" class="btn  btn-ini" >Actualizar</button>
             </div>
           </form>
         </div>
