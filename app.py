@@ -422,18 +422,7 @@ def correoRecuperacion():
 
 #-------------------------------------------------------------------- 
 
-@app.route('/CorreoValidar/',methods=['POST'])
-def correoValidacion():
-    """ 
-        Envia Correo de validacion del usuario
 
-    """
-    usuario = Usuarios.query.filter_by(correo=email).first()
-    contenido = render_template('correoActivacion.html', nombre = usuario.nombreUsuario )
-    yag = yagmail.SMTP('redvisionmisiontic@gmail.com', 'Grupo11B') 
-    yag.send(to=email, subject='Confirmación de activación de cuenta',contents=contenido)
-    usuario.activo = True
-    db.session.commit()
 
 #-------------------------------------------------------------------- 
 
