@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.secret_key = 'dsadwe'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/database.db'
 app.config['UPLOAD_FOLDER'] = './static/imagenes'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 from modelos import Usuarios,Imagenes
 import utils
