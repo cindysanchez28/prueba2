@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/icon.jpeg')}}" />
+    <!-- Bootstrap CSS cambios para commit-->
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/bootstrap/css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{url_for('static', filename='assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    <script src="{{url_for('static', filename='js/ajaxlogin.js')}}"></script>
+    <script src="{{url_for('static', filename='js/ajaxRegistro.js')}}"></script>
+
+
+    <title>Redvision</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar fixed-top menu">
+        <div>
+          <img height="70px"src="{{url_for('static', filename='img/logo.jpeg')}}" alt="logo redvision" />
+        </div>
+        
+        <ul class="nav navbar justify-content-end">
+          <li class="nav-item pr-3">
+            <a
+              id="BtnIniciar"
+              class="btn btn-ini boton"
+              href="#"
+              data-toggle="modal"
+              data-target="#staticBackdrop"
+              >Iniciar Sesión</a
+            >
+          </li>          
+          <li class="nav-item">
+            <a
+              id="BtnRegistro"
+              class="btn btn-light boton"
+              href="#"
+              data-toggle="modal"
+              data-target="#staticBackdrop2"
+              >Registrarme</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div class="pt-5 mt-5 container-fluid mb-5">
+      <div class="row">
+        <div class="col-4">
+          <img class="dim pointer" src="../static/img/1.jpg" alt="foto" data-toggle="modal" data-target="#modalAviso" />
+        </div>
+        <div class="col-4">
+          <img class="dim pointer" src="../static/img/2.jpg" alt="foto" data-toggle="modal" data-target="#modalAviso" />
+        </div>
+        <div class="col-4">
+          <img class="dim pointer" src="../static/img/3.jpg" alt="foto" data-toggle="modal" data-target="#modalAviso" />
+        </div>
+        <div class="col-6 over pt-3 text-center">
+          <img class="dim2 pointer" src="../static/img/4.jpg" alt="foto" data-toggle="modal" data-target="#modalAviso" />
+        </div>
+        <div class="col-6 over pt-3 text-center">
+          <img class="dim2 pointer" src="../static/img/7.jpg" alt="foto" data-toggle="modal" data-target="#modalAviso" />
+        </div>
+        <div class="col-3 pt-3">
+          <img class="dim3 pointer" src="../static/img/5.jpg" alt="foto" data-toggle="modal" data-target="#modalAviso" />
+        </div>
+        <div class="col-3 pt-3">
+          <img class="dim3 pointer" src="../static/img/6.jpg" alt="foto" data-toggle="modal" data-target="#modalAviso" />
+        </div>
+        <div class="col-3 pt-3">
+          <img class="dim3 pointer" src="../static/img/8.jpg" alt="foto" data-toggle="modal" data-target="#modalAviso" />
+        </div>
+        <div class="col-3 pt-3">
+          <img class="dim3 pointer" src="../static/img/9.jpg" alt="foto" data-toggle="modal" data-target="#modalAviso" />
+        </div>
+      </div>
+
+    <!-- Modal login -->
+    <div
+        class="modal hide fade"
+        id="staticBackdrop"
+        data-keyboard="true"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">
+                Iniciar Sesión
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <form action="/login" method="POST" id="formlogin" >
+                <div class="form-group">
+                  <input
+                    type="email"
+                    placeholder="Correo"
+                    class="form-control "
+                    id="correo"
+                    aria-describedby="emailHelp"
+                    name="correo"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="password"
+                    placeholder="Contraseña"
+                    class="form-control "
+                    placeholder=""
+                    id="contraseña"
+                    name="contraseña"
+                    required
+                  />
+                </div>
+                
+                <div class="iniciar text-center">
+                  <div id="error"></div>
+                  <button  type="submit" class="btn btn-block btn-sesion mb-2">Iniciar Sesión</button>
+                  <a  href="" data-dismiss="modal" data-toggle="modal" data-target="#recuperacion">¿Olvidaste tu Contraseña?</a>
+                </div>
+              </form>
+              
+            </div>
+
+            <div class="text-center linea pt-3 mb-2">
+              <button  class="btn btn-crear mb-2" data-dismiss="modal" data-toggle="modal" data-target="#staticBackdrop2">Crear Cuenta Nueva</button>
+            </div>
+
+          </div>
+        </div>
+    </div>
+    
+
+
+    <!-- Modal registro -->
+    <div
+        class="modal fade"
+        id="staticBackdrop2"
+        data-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">
+                Registrarme
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <form action="/crearusuario" method="POST" id="formregistro">
+                <div class="form-group row ">             
+                  <input
+                    type="text"
+                    placeholder="Nombre"
+                    class="form-control col-5 ml-3 mr-4"
+                    id="nombrer"
+                    name="nombre"
+                    required
+                  />
+
+                  <input
+                    type="text"
+                    placeholder="Apellido"
+                    class="form-control col-5"
+                    id="apellidor"
+                    name="apellido"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="text"
+                    placeholder="Nombre de Usuario"
+                    class="form-control"
+                    id="usuarior"
+                    name="usuarior"
+                   
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="email"
+                    placeholder="Correo Electrónico"
+                    class="form-control"
+                    id="correor"
+                    name="correo"
+                    required
+
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="password"
+                    placeholder="Contraseña"
+                    class="form-control"
+                    id="contraseñar"
+                    name="contraseña"
+                    required
+                  />
+                </div>
+                <div class="form-group mt-3">
+                  <input
+                    type="date"
+                    placeholder="Fecha de nacimiento"
+                    class="form-control"
+                    id="fechar"
+                    name="fecha"
+                    required
+                  />
+                </div>
+                <div id="errorRegistro"></div>
+                <div class="text-center  pt-3 mb-2">
+                  <button type="submit" class="btn btn-crear mb-2">Crear Cuenta Nueva</button>
+                </div>
+              </form>
+            </div>
+
+
+          </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal Aviso-->
+    <div class="modal fade" id="modalAviso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body pt-5 pb-5 pl-3 pr-3">
+            <p class="text-center">Para acceder a la publicación debe iniciar sesión o crear una cuenta</p>
+
+            <div class="iniciar text-center">
+              <a class="btn btn-block btn-sesion mb-2" data-toggle="modal" data-target="#staticBackdrop" data-dismiss="modal">
+                Iniciar Sesión
+              </a>
+              <a href="">¿Olvidaste tu Contraseña?</a>
+            </div>
+     
+            <div class="text-center linea pt-3 mb-2">
+              <button class="btn btn-crear mb-2" data-dismiss="modal" data-toggle="modal" data-target="#staticBackdrop2">Crear Cuenta Nueva</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Modal Recuperar Contraseña -->
+    <div
+      class="modal fade"
+      id="recuperacion"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">
+              Recuperacion de contraseña
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/CorreoRecuperar" method="POST">
+              <div class="form-group">
+                <input
+                  type="email"
+                  placeholder="Ingrese su correo electronico"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  name="recuperarcorreo"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="iniciar text-center">
+                <a class="btn btn-block btn-sesion mb-2" data-dismiss="modal" onclick="recuperarContrasena()">
+                  Enviar
+                </a>
+              
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    
+  </body>
+</html>

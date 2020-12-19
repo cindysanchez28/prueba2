@@ -1,0 +1,59 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+
+}
+.header{
+    
+    position: relative;
+    background-color:rgb(255, 255, 255);
+    width: 100%;
+    height: 100vh;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0,0.5);
+    
+    
+}
+.modal-content {
+    transition: all 500ms ease;
+    width: 300px;
+    transform: translateY(-15%);
+}
+.modall{
+
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    width: 100%;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 18, 18, 0.5);
+    transition: all 500ms ease;
+    position: relative;
+    
+    
+}
+#boton-modal:checked ~ .modall{
+    
+    opacity: 1;
+    visibility: visible;
+}
+#boton-modal:checked ~ .modall .modal-content {
+    transform: translateY(0%);
+}
+
+
+
+#boton-modal{
+    visibility: hidden;
+    
+}
+
+.label-modal{
+    background: seashell;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}

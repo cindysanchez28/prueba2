@@ -1,0 +1,145 @@
+
+/* Principal */
+.t-primary {
+  color: #6647FC;
+}
+
+.t-secundary {
+  color: #9C53F5;
+}
+
+.menu {
+  background-color: white;
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.192);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.192);
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.192);
+}
+.boton {
+  color: black;
+  font-weight: bold;
+}
+
+.btn-ini {
+  background-color: #6647FC;
+  color: white;
+}
+.btn-sesion {
+  background-color: #6647FC;
+  color: white;
+  font-weight: bold;
+}
+.btn-crear {
+  background-color: #9C53F5;
+  color: white;
+  font-weight: bold;
+}
+
+.dim {
+  height:200px ;
+  width: 400px;
+}
+.dim2 {
+  width: 600px;
+  height: 300px;
+}
+.dim3 {
+  height:150px ;
+  width: 300px;
+}
+.over {
+  position: relative;
+  overflow: hidden;
+}
+
+.linea {
+  border-top: 1px solid rgba(149, 147, 147, 0.198);
+}
+
+
+/* Dahsboard */
+.icon-user{
+  color:  #9C53F5;
+}
+.input-group-fondo {
+  background-color: transparent !important;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-menu {
+  left: -105px !important;
+}
+
+.frase {
+  font-size: 11px;
+}
+
+/* Perfil */
+.redondo {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+.din4 {
+  position: relative;
+  height: 350px;
+  width: 350px;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.modal-image .img-grande {
+  height: 442px;
+  width: 442px;
+}
+.input-upload{
+  height: 442px;
+  width: 442px;
+}
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  }
+.header-perfil {
+  width: 100% !important;
+}
+
+/* Input File */
+.file-input span{
+  display:none;
+}
+.file-caption-main {
+  display: none;
+  
+}
+
+
+/* configuracion */
+
+.btnSelectConf {
+  width: 167px !important;
+}
+
+@media (min-width: 576px){
+  .modal-dialog {
+      max-width: 350px;
+      margin: 1.75rem auto;
+  }
+  .modal-image .modal-dialog {
+    max-width: 800px;
+    margin: 1.75rem auto;
+  }
+}
+
+
+.img-tamaño {
+  height: 350px !important;
+      
+}
+  
