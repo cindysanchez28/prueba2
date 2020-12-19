@@ -4,10 +4,10 @@
     <div class="container perfil mt-5 pt-5">
         <div class="row">
             <div class="col-6 mt-5 d-flex justify-content-center align-items-center">
-                <img class="redondo" src="{{url_for('static', filename=usuario.imgPerfil)}}" alt="perfil">
-                <h3 class="ml-3">{{usuario.nombre}} {{usuario.apellido}} <br>
-                    <p class="h6 text-muted mb-0">@{{usuario.nombreUsuario}}</p>
-                    <p class="h6 text-muted mt-0">{{ npublicaciones}} publicaciones</p>
+                <img class="redondo" src="{{url_for('static', filename='img/perfil_defecto.jpg')}}" alt="perfil">
+                <h3 class="ml-3">Nombre Usuario <br>
+                    <p class="h6 text-muted mb-0">@{{session['nombre']}}</p>
+                    <p class="h6 text-muted mt-0">6 publicaciones</p>
                 </h3>
             </div>
         </div>
@@ -17,184 +17,147 @@
             <div class="col-12">
                 <h4>Publicaciones</h4>
             </div>
+            {% for image in imagenes %}
+            <div class="col-4 mb-3">
+                <img class="din4 pointer" src=" {{url_for('static', filename=image.url)}} "   data-toggle="modal" data-target="#{{image.nombre}} " alt="foto"  >
+            </div>
+
+            <!-- Modal fotografia -->
+            <div class="modal-image">
+              <!-- Modal -->
+              <div class="modal fade" id="{{image.nombre}}"  data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body row p-0">
+                        <div class="col-7 position-relative overflow-hidden">
+                            <img class="img-grande" src=" {{url_for('static', filename=image.url)}} "  alt="foto">
+                        </div>
+                        <div class="col-5 pt-3">
+                            <div class="header-perfil d-flex justify-content-between align-items-center">
+                                <div class="usuario-perfil">
+                                    <img height="40px" width="40px"  style="border-radius: 50%;" src="{{url_for('static', filename='img/perfil_defecto.jpg')}}" alt="perfil">
+                                    <span>@{{session['nombre']}}</span>
+                                </div>
+                                <div class="menu-hamburger">
+                                    <ul class="nav navbar justify-content-between">
+                                          <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle text-black" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-bars" style="color: #6647FC;" aria-hidden="true"></i>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ModalImage{{image.id}}" data-dismiss="modal">Editar</a>
+                                              <a class="dropdown-item" href="#" onclick="eliminar()" >Eliminar</a>
+                                              <input type="text" class="d-none" id="eliminarImagenI" value="{{image.id}}">
+                                            </div>
+                                          </li>
+                                      </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-4">
+                                    <h5>{{image.nombre}}</h5>
+                                    <h6 class="mt-3">Descripcion</h6>
+                                    <p style="font-size: 14px;" class="pr-4 text-justify">{{image.descripcion}}</p>
+                                    <p style="font-size: 14px; color:#6647FC;">Imagen Publica</p>
+                                    <p style="font-size: 14px;" class="text-muted">Publicación: {{image.fecha}}</p>
+                                </div>
+                                <div class="col-12 text-right">
+                                <i class="fa fa-cloud-download fa-3x mr-4 pointer" data-toggle="tooltip" data-placement="bottom" title="Descargar Imagen" aria-hidden="true" style="color:#6647FC;" aria-hidden="true"></i>
+                                </div>
+
+                            </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+
+
+
+             <!-- Modal Editar fotografia -->
+            <div class="modal-image">
+              <!-- Modal -->
+              <div class="modal fade" id="ModalImage{{image.id}}"  data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body row p-0">
+                        <div class="col-7 position-relative overflow-hidden">
+                            <img class="img-grande" src=" {{url_for('static', filename=image.url)}} "  alt="foto">
+                        </div>
+                        <div class="col-5 pt-3">
+                            <div class="header-perfil d-flex justify-content-between align-items-center">
+                                <div class="usuario-perfil">
+                                    <img height="40px" width="40px"  style="border-radius: 50%;" src="{{url_for('static', filename='img/perfil_defecto.jpg')}}" alt="perfil">
+                                    <span>@{{session['nombre']}}</span>
+                                </div>
+                            </div>
+                            <form class="row" action="{{ url_for('updateImage')}}" method="POST"  enctype="multipart/form-data">
+                                <div class="col-12 pt-3">
+                                  <div style="margin-right: 3rem;">
+                                    <div class="form-group">
+                                      <input type="text" class="form-control" placeholder="Nombre Imagen" id="nombreImagen" name="nombre" aria-describedby="emailHelp" value="{{image.nombre}}">
+                                    </div>
+                                    <div class="form-group">
+                                      <textarea class="form-control text-left" placeholder="Descripcion" id="descripcionImagen" name="descripcion" rows="5">{{image.descripcion}}</textarea>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-12">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="publica" name="estado" value="publica" checked="{{image.publico}}">
+                                    <label class="form-check-label" for="inlineRadio1">Publica</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="privada" name="estado" value="privada" checked="{{image.publico}}">
+                                    <label class="form-check-label" for="inlineRadio2">Privada</label>
+                                  </div>
+                                  <div class="custom-file mt-3" id="customFile">
+                                    <input type="file" class="custom-file-input" id="exampleInputFile" name="nuevaImagen" aria-describedby="fileHelp">
+                                    <label class="custom-file-label" for="exampleInputFile">
+                                      Imagen Nueva
+                                    </label>
+                                  </div>
+                                  <div class="form-group">
+                                    <input type="text" class="form-control d-none" placeholder="idImagen" id="idImagen" name="idImagen" aria-describedby="hello" value="{{image.id}}">
+                                  </div>
+                                  <div class="form-group">
+                                    <input type="text" class="form-control d-none" placeholder="direccion" id="direccion" name="direccion" aria-describedby="hello" value="{{image.url}}">
+                                  </div>
+                                  <div style="margin-top: 1rem; margin-right: 3rem;">
+                                    <button type="submit" class="btn btn-ini btn-block ">Actualizar</button>
+                                  </div>
+                                </div>
+                              </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+
+
+            {% endfor %}
           
   
   
 
       </div>
 
-  <div class="pt-5 mt-3 container-fluid mb-5">
-    <div class="row">
-      {% for image in imagenes %}
-      <div class="col-4 mb-3">
-          <img class="din4 pointer" src="{{url_for('static', filename=image.url)}} "   data-toggle="modal" data-target="#imagePerfil{{image.id}} " alt="foto"  >
-      </div>
-
-      
-      <div class="modal-image">
-      
-        <div class="modal fade" id="imagePerfil{{image.id}}"  data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body row p-0">
-                  <div class="col-7 position-relative overflow-hidden">
-                      <img class="img-grande" src="{{url_for('static', filename=image.url)}} "  alt="foto">
-                  </div>
-                  <div class="col-5 pt-3">
-                      <div class="header-perfil d-flex justify-content-between align-items-center">
-                          <div class="usuario-perfil">
-                              <img height="40px" width="40px"  style="border-radius: 50%;" src="{{url_for('static', filename=usuario.imgPerfil)}}" alt="perfil">
-                              <span>@{{usuario.nombreUsuario}}</span>
-                          </div>
-                          <div class="menu-hamburger">
-                              <ul class="nav navbar justify-content-between">
-                                    <li class="nav-item dropdown">
-                                      <a class="nav-link dropdown-toggle text-black" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                          <i class="fa fa-bars" style="color: #6647FC;" aria-hidden="true"></i>
-                                      </a>
-                                      <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ModalImage{{image.id}}" data-dismiss="modal">Editar</a>
-                                        <a class="dropdown-item" href="#" onclick="eliminar{{image.id}}()" >Eliminar</a>
-                                        <input type="text" class="d-none" id="eliminarImagenI" value="{{image.id}}">
-                                      </div>
-                                    </li>
-                                </ul>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-12 mt-4">
-                              <h5>{{image.nombre}}</h5>
-                              <h6 class="mt-3">Descripcion</h6>
-                              <p style="font-size: 14px;" class="pr-4 text-justify">{{image.descripcion}}</p>
-                              
-                              <p style="font-size: 14px; color:#6647FC;">Imagen Publica</p>
-                              <p style="font-size: 14px;" class="text-muted">Publicación: {{image.fecha}}</p>
-                          </div>
-                          <div class="col-12 text-right">
-
-                            <a href="{{url_for('static', filename=image.url)}} " download>
-                              <i class="fa fa-cloud-download fa-3x mr-4 pointer" data-toggle="tooltip" data-placement="bottom" title="Descargar Imagen" aria-hidden="true" style="color:#6647FC;" aria-hidden="true"></i>
-                            </a>
-                          </div>
-
-                      </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-
-      </div>
 
 
 
-      
-      <div class="modal-image">
-      
-        <div class="modal fade" id="ModalImage{{image.id}}"  data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body row p-0">
-                  <div class="col-7 position-relative overflow-hidden">
-                      <img class="img-grande" src=" {{url_for('static', filename=image.url)}} "  alt="foto">
-                  </div>
-                  <div class="col-5 pt-3">
-                      <div class="header-perfil d-flex justify-content-between align-items-center">
-                          <div class="usuario-perfil">
-                              <img height="40px" width="40px"  style="border-radius: 50%;" src="{{url_for('static', filename='image.url')}}" alt="perfil">
-                              <span>@{{usuario.nombreUsuario}}</span>
-                          </div>
-                      </div>
-                      <form class="row" action="{{ url_for('updateImage')}}" method="POST"  enctype="multipart/form-data">
-                          <div class="col-12 pt-3">
-                            <div style="margin-right: 3rem;">
-                              <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Nombre Imagen" id="nombreImagen" name="nombre" aria-describedby="emailHelp" value="{{image.nombre}}">
-                              </div>
-                              <div class="form-group">
-                                <textarea class="form-control text-left" placeholder="Descripcion" id="descripcionImagen" name="descripcion" rows="5">{{image.descripcion}}</textarea>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-12">
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" id="publica" name="estado" value="publica" checked="{{image.publico}}">
-                              <label class="form-check-label" for="inlineRadio1">Publica</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" id="privada" name="estado" value="privada" checked="{{image.publico}}">
-                              <label class="form-check-label" for="inlineRadio2">Privada</label>
-                            </div>
-                            <div class="custom-file mt-3" id="customFile">
-                              <input type="file" class="custom-file-input" id="exampleInputFile" name="nuevaImagen" aria-describedby="fileHelp">
-                              <label class="custom-file-label" for="exampleInputFile">
-                                Imagen Nueva
-                              </label>
-                            </div>
-                            <div class="form-group">
-                              <input type="text" class="form-control d-none" placeholder="idImagen" id="idImagen" name="idImagen" aria-describedby="hello" value="{{image.id}}">
-                            </div>
-                            <div class="form-group">
-                              <input type="text" class="form-control d-none" placeholder="direccion" id="direccion" name="direccion" aria-describedby="hello" value="{{image.url}}">
-                            </div>
-                            <div style="margin-top: 1rem; margin-right: 3rem;">
-                              <button type="submit" class="btn btn-ini btn-block ">Actualizar</button>
-                            </div>
-                          </div>
-                        </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-      </div>
-      <script>
-        
-      function eliminar{{image.id}}(){
-        swal({
-            title: "¿Estas Seguro?",
-            text: "Una vez eliminada la imagen no podras recuperarla",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-              $.ajax({
-                data:{
-                    id: "{{image.id}}"
-                },
-                type: 'POST',
-                url: '/deleteImage'
-              })
-              .done(function(data){
-                
-                $(location).attr('href', '/perfil/')
-              });
-              
-              
-            } else {
-              swal("Tu imagen no se elimino", {
-                button : {
-                    className : "btn-ini"
-                }
-              });
-            }
-          });
-      }
-
-      </script>
-
-      {% endfor %}
-    </div>
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-     
+  <script
+  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"
+></script>
 <script src="{{url_for('static', filename='assets/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{url_for('static', filename='assets/kartik/js/fileinput.min.js')}}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!--<script src="{{ url_for('static', filename='js/main.js')}}?n=4"></script>-->
+<script src="{{ url_for('static', filename='js/main.js')}}"></script>
 
 {% endblock %}

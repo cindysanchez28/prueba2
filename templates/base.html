@@ -32,20 +32,17 @@
                     <i class="fa fa-search" aria-hidden="true"></i>
                   </div>
                 </div>
-                <form action="/dashboard" method="GET">
-                  <input name="buscar" type="text submit" class="form-control" placeholder="Buscar" aria-label="Input group example" aria-describedby="btnGroupAddon">
-                </form>
-                
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Input group example" aria-describedby="btnGroupAddon">
               </div>
             </li>
             <li class="nav-item mr-4" style="cursor: pointer;" data-toggle="modal" data-target="#imageUpload">
               <i class="fa fa-cloud-upload fa-2x icon-user" data-toggle="tooltip" data-placement="bottom" title="Subir Imagen" aria-hidden="true" ></i>
             </li>
                 <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-black" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img height="40px" width="40px"  style="border-radius: 50%;" src="{{url_for('static', filename=usuario.imgPerfil)}}"  alt="perfil"><span class="icon-user">@{{session['nombreUsuario']}}</span></a>
+                <a class="nav-link dropdown-toggle text-black" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img height="40px" width="40px"  style="border-radius: 50%;" src="{{url_for('static', filename='img/perfil_defecto.jpg')}}" alt="perfil"><span class="icon-user">@{{session['nombre']}}</span></a>
                 <div class="dropdown-menu">
                   <div class="pl-2">
-                    <h5 ><strong>Hola, {{session['nombreUsuario']}} </strong></h5>
+                    <h5 ><strong>Hola, {{session['nombre']}} </strong></h5>
                     <span class="text-black-50 frase mr-2">Inspirate, captura buenos momentos!</span>
                   </div>
                   <hr>
@@ -75,7 +72,7 @@
                       <div class="header-perfil d-flex justify-content-between align-items-center">
                            <div class="usuario-perfil">
                                <img height="40px" width="40px"  style="border-radius: 50%;" src="{{url_for('static', filename='img/perfil_defecto.jpg')}}" alt="perfil">
-                               <span>@{{usuario.nombre}}</span>
+                               <span>@{{session['nombre']}}</span>
                            </div>
                       </div>
                       <div class="row">

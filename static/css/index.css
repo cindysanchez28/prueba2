@@ -116,15 +116,14 @@
 }
 .file-caption-main {
   display: none;
-  
+}
+.custom-file {
+  width: 267px !important;
+}
+#customFile{
+  width: 267px !important;
 }
 
-
-/* configuracion */
-
-.btnSelectConf {
-  width: 167px !important;
-}
 
 @media (min-width: 576px){
   .modal-dialog {
@@ -136,10 +135,3 @@
     margin: 1.75rem auto;
   }
 }
-
-
-.img-tamaño {
-  height: 350px !important;
-      
-}
-  

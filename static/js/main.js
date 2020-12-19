@@ -1,5 +1,8 @@
 
-function eliminar(){
+function eliminar(id){
+  idImagen = document.getElementById('eliminarImagenId')
+  console.log(idImagen.value);
+  console.log(id);
     swal({
         title: "¿Estas Seguro?",
         text: "Una vez eliminada la imagen no podras recuperarla",
@@ -9,21 +12,9 @@ function eliminar(){
       })
       .then((willDelete) => {
         if (willDelete) {
-          $.ajax({
-            data:{
-                //correo: $('#correo').val(),
-                id: idImg
-            },
-            type: 'POST',
-            url: '/deleteImage'
-          })
-          .done(function(data){
-            swal("Tu imagen fue eliminada", {
-              icon: "success",
-            });
+          swal("Tu imagen fue eliminada", {
+            icon: "success",
           });
-          
-          
         } else {
           swal("Tu imagen no se elimino", {
             button : {
@@ -32,9 +23,4 @@ function eliminar(){
           });
         }
       });
-}
-
-function Storage() {
-  console.log("ejecutando la funcion");
-  //usuario = document.getElementById("");
 }

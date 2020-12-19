@@ -1,8 +1,0 @@
-usuarioprueba1@gmail.com
-contraseña: usuarioprueba1
-
-hpark@gmail.com
-contraseña: hpark
-
-bvazquez@gmail.com
-contraseña: bvazquez
